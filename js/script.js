@@ -1,89 +1,91 @@
-      // Theme Toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const body = document.body;
-      
-      // Check for saved theme or prefer-color-scheme
-      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-      const savedTheme = localStorage.getItem('theme');
-      
-      if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
-        body.classList.add('dark-mode');
-      }
-      
-      themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        localStorage.setItem('theme', body.classList.contains('dark-mode') ? 'dark' : 'light');
-      });
-      
-      // Back to top button
-      const backToTopButton = document.querySelector(".back-to-top");
+// Theme Toggle
+const themeToggle = document.getElementById("themeToggle");
+const body = document.body;
 
-      window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add("show");
-        } else {
-          backToTopButton.classList.remove("show");
-        }
-      });
+// Check for saved theme or prefer-color-scheme
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+const savedTheme = localStorage.getItem("theme");
 
-      // Form submission
-      document.querySelector("form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        
-        // Show success message
-        const submitBtn = this.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Message Sent!';
-        submitBtn.disabled = true;
-        
-        // Reset form after 3 seconds
-        setTimeout(() => {
-          this.reset();
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        }, 3000);
-      });
+if (savedTheme === "dark" || (!savedTheme && prefersDarkScheme.matches)) {
+  body.classList.add("dark-mode");
+}
 
-      // Animation on scroll
-      const animateOnScroll = () => {
-        const elements = document.querySelectorAll('[data-animation]');
-        
-        elements.forEach(element => {
-          const elementPosition = element.getBoundingClientRect().top;
-          const screenPosition = window.innerHeight / 1.2;
-          
-          if (elementPosition < screenPosition) {
-            const animation = element.getAttribute('data-animation');
-            const delay = element.getAttribute('data-delay') || 0;
-            
-            setTimeout(() => {
-              element.classList.add('animate__' + animation);
-            }, delay);
-          }
-        });
-      };
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  localStorage.setItem(
+    "theme",
+    body.classList.contains("dark-mode") ? "dark" : "light"
+  );
+});
 
-      // Initialize animations on load and scroll
-      window.addEventListener('load', animateOnScroll);
-      window.addEventListener('scroll', animateOnScroll);
+// Back to top button
+const backToTopButton = document.querySelector(".back-to-top");
 
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          const navbarToggler = document.querySelector(".navbar-toggler");
-          const navbarNav = document.querySelector("#navbarNav");
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 300) {
+    backToTopButton.classList.add("show");
+  } else {
+    backToTopButton.classList.remove("show");
+  }
+});
 
-          if (navbarToggler && !navbarToggler.classList.contains("collapsed")) {
-            navbarToggler.click();
-          }
-        });
-      });
+// Form submission
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-      // Add pulse animation to CTA button periodically
-      setInterval(() => {
-        const ctaButton = document.querySelector('.pulse');
-        ctaButton.classList.remove('pulse');
-        void ctaButton.offsetWidth; // Trigger reflow
-        ctaButton.classList.add('pulse');
-      }, 4000);
-    
+  // Show success message
+  const submitBtn = this.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Message Sent!';
+  submitBtn.disabled = true;
+
+  // Reset form after 3 seconds
+  setTimeout(() => {
+    this.reset();
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  }, 3000);
+});
+
+// Animation on scroll
+const animateOnScroll = () => {
+  const elements = document.querySelectorAll("[data-animation]");
+
+  elements.forEach((element) => {
+    const elementPosition = element.getBoundingClientRect().top;
+    const screenPosition = window.innerHeight / 1.2;
+
+    if (elementPosition < screenPosition) {
+      const animation = element.getAttribute("data-animation");
+      const delay = element.getAttribute("data-delay") || 0;
+
+      setTimeout(() => {
+        element.classList.add("animate__" + animation);
+      }, delay);
+    }
+  });
+};
+
+// Initialize animations on load and scroll
+window.addEventListener("load", animateOnScroll);
+window.addEventListener("scroll", animateOnScroll);
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarNav = document.querySelector("#navbarNav");
+
+    if (navbarToggler && !navbarToggler.classList.contains("collapsed")) {
+      navbarToggler.click();
+    }
+  });
+});
+
+// Add pulse animation to CTA button periodically
+setInterval(() => {
+  const ctaButton = document.querySelector(".pulse");
+  ctaButton.classList.remove("pulse");
+  void ctaButton.offsetWidth; // Trigger reflow
+  ctaButton.classList.add("pulse");
+}, 4000);
