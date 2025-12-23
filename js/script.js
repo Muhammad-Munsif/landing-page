@@ -1,4 +1,3 @@
-<script>
       // Theme Toggle
       const themeToggle = document.getElementById('themeToggle');
       const body = document.body;
@@ -87,4 +86,4 @@
         void ctaButton.offsetWidth; // Trigger reflow
         ctaButton.classList.add('pulse');
       }, 4000);
-    </script>
+    
